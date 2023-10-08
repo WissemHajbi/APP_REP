@@ -28,7 +28,8 @@ public class Client {
 
             output.write(nb);
 
-            System.out.println(input.read());
+            int result = input.read();
+            System.out.println("Recieved result from server = "+ result);
 
         }catch(Exception e){
             System.out.println("CLient here");
