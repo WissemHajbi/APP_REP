@@ -3,6 +3,8 @@ package ServerPackage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -13,6 +15,11 @@ public class Server {
             Socket clientSocket = ss.accept();
             InputStream input = clientSocket.getInputStream();
             OutputStream output = clientSocket.getOutputStream();
+
+            InetAddress IA = InetAddress.getByName("10.27.15.178");
+		    InetSocketAddress ISA = new InetSocketAddress(IA,1234);
+		    Socket client = new Socket();
+		    client.connect(ISA);
 
             System.out.println("1");
 
