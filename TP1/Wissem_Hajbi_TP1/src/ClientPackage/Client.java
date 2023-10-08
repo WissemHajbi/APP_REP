@@ -8,15 +8,18 @@ import java.net.InetSocketAddress;
 
 public class Client {
     public static void main(String[] args){
-        try(Socket socket = new Socket("LocalHost",1234);
-            InputStream input = socket.getInputStream();
-            OutputStream output = socket.getOutputStream();)
+        try
         {
 
             InetAddress IA = InetAddress.getByName("10.27.15.178");
 		    InetSocketAddress ISA = new InetSocketAddress(IA,1234);
+
 		    Socket client = new Socket();
-		    client.connect(ISA);
+		    
+            client.connect(ISA);
+            
+            InputStream input = client.getInputStream();
+            OutputStream output = client.getOutputStream();
 
             System.out.println("connected");
             Scanner scanner = new Scanner(System.in);
