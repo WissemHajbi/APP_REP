@@ -11,7 +11,7 @@ public class Client {
         try
         {
 
-            InetAddress IA = InetAddress.getByName("10.27.15.178");
+            InetAddress IA = InetAddress.getByName("10.27.13.29");
 		    InetSocketAddress ISA = new InetSocketAddress(IA,1234);
 
 		    Socket client = new Socket();
@@ -20,16 +20,32 @@ public class Client {
             
             InputStream input = client.getInputStream();
             OutputStream output = client.getOutputStream();
+            InputStreamReader isr = new InputStreamReader(input);
+            BufferedReader br = new BufferedReader(isr);
 
-            System.out.println("connected");
+
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Please enter an integer: ");
-            int nb = scanner.nextInt();
 
-            output.write(nb);
+            System.out.println("donner nb1 = ");
+            String nb1 = scanner.nextLine();
+            System.out.println("donner nb2 = ");
+            String nb2 = scanner.nextLine();
 
-            int result = input.read();
-            System.out.println("Recieved result from server = "+ result);
+            String op;
+            do{
+                System.out.println("donner op = ");
+                op = scanner.nextLine();
+            }while(!(op.equals("+")) && !(op.equals("-")) && !(op.equals("*")) && !(op.equals("/")));
+
+
+            PrintWriter pw = new PrintWriter(output,true);
+
+            pw.println(nb1);
+            pw.println(nb2);
+            pw.println(op);
+
+
+            System.out.println(br.readLine());
 
         }catch(Exception e){
             System.out.println("CLient here");

@@ -1,8 +1,6 @@
 package ServerPackage;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,16 +10,30 @@ public class Server {
         try(ServerSocket ss = new ServerSocket(1234))
         {
             Socket clientSocket = ss.accept();
+
             InputStream input = clientSocket.getInputStream();
             OutputStream output = clientSocket.getOutputStream();
-            
-            int in = input.read();
 
-            in *= 5;
+            InputStreamReader isr = new InputStreamReader(input);
+            BufferedReader br = new BufferedReader(isr);
 
-            System.out.println(in);
+            int nb1 = Integer.parseInt(br.readLine());
+            int nb2 = Integer.parseInt(br.readLine());
+            String op = br.readLine();
 
-            output.write(in);
+            int res = 0;
+
+            switch(op){
+                case "+" : res = nb1 + nb2;break;
+                case "-" : res = nb1 - nb2;break;
+                case "*" : res = nb1 * nb2;break;
+                case "/" : res = nb1 / nb2;break;
+            }
+
+            PrintWriter pw = new PrintWriter(output,true);
+            pw.println(res);
+
+
 
         }catch (IOException e) {
             System.out.println("here");
