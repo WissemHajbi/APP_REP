@@ -9,7 +9,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             // Define the server's IP address and port
-            InetAddress serverAddress = InetAddress.getByName("192.168.1.2");
+            InetAddress serverAddress = InetAddress.getByName("localhost");
             InetSocketAddress serverSocketAddress = new InetSocketAddress(serverAddress, 1234);
 
             // Create a socket to cx    onnect to the server
