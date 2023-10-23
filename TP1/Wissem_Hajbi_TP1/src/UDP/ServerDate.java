@@ -1,8 +1,10 @@
 package UDP;
 
 import java.net.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class Server {
+public class ServerDate {
     public static void main(String[] args){
         try{
             // Create a DatagramSocket bound to port 1235 for receiving data
@@ -18,8 +20,13 @@ public class Server {
                 // Receive data from the client
                 serverSocket.receive(packetIn);
 
+                // Format the date object
+                String dateStr = new String(receiveData, 0, packetIn.getLength());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-d");
+                Date receivedDate = dateFormat.parse(dateStr);
+
                 // Convert the received data to a string and print it
-                System.out.println("Bonjour " + new String(receiveData, 0, packetIn.getLength()));
+                System.out.println("Bonjour " + receivedDate);
             }
 
         } catch (Exception e) {
